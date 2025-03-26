@@ -1,0 +1,37 @@
+HELP.md
+AuthSync/target/
+!AuthSync/.mvn/wrapper/maven-wrapper.jar
+!AuthSync/**/src/main/**/target/
+!AuthSync/**/src/test/**/target/
+
+### STS ###
+AuthSync/.apt_generated
+AuthSync/.classpath
+AuthSync/.factorypath
+AuthSync/.project
+AuthSync/.settings
+AuthSync/.springBeans
+AuthSync/.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+AuthSync/nbproject/private/
+AuthSync/nbbuild/
+AuthSync/dist/
+AuthSync/nbdist/
+AuthSync/.nb-gradle/
+AuthSync/build/
+!AuthSync/**/src/main/**/build/
+!AuthSync/**/src/test/**/build/
+
+### VS Code ###
+AuthSync/.vscode/
+
+SyncPanel/dist/
+SyncPanel/node_modules/
+SyncPanel/.angular/
