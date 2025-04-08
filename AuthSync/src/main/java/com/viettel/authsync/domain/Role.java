@@ -10,11 +10,11 @@ import java.util.Set;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String roleName;  // VD: "ADMIN", "USER", "SCIM_MANAGER"
+    private Long id;
+    private String name;  // VD: "ADMIN", "USER", "SCIM_MANAGER"
 
     @ManyToMany(mappedBy = "roles")
-    List<User> users;
+    private List<User> users;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -22,5 +22,37 @@ public class Role {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "menu_id")
     )
-    Set<Menu> menus;
+    private Set<Menu> menus;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public Set<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

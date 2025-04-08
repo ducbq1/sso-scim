@@ -1,10 +1,18 @@
 package com.viettel.authsync.repository;
 
-import com.viettel.authsync.domain.OAuth2Client;
-import com.viettel.authsync.domain.User;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.viettel.authsync.domain.User;
+
 @Repository
-public interface UserRepository extends BaseRepository<User, Long> {
-    // Nếu cần thêm các phương thức tùy chỉnh
+public interface UserRepository extends JpaRepository<User, Long> {
+    boolean existsByUsername(String username);
+
+    Optional<User> findByUsername(String username);
+
+    List<User> findUserByIsSynced(boolean isSynced);
 }

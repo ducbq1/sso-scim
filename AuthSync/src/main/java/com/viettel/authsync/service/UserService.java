@@ -1,8 +1,27 @@
 package com.viettel.authsync.service;
 
-import com.viettel.authsync.domain.OAuth2Client;
+import java.util.List;
+
 import com.viettel.authsync.domain.User;
+import com.viettel.authsync.dto.request.UserCreationRequest;
+import com.viettel.authsync.dto.request.UserUpdateRequest;
+import com.viettel.authsync.dto.response.UserResponse;
 import org.springframework.stereotype.Service;
 
-public interface UserService extends BaseService<User, Long> {
+public interface UserService {
+    UserResponse createUser(UserCreationRequest request);
+
+    UserResponse getMyInfo();
+
+    UserResponse updateUser(Long userId, UserUpdateRequest request);
+
+    void deleteUser(Long userId);
+
+    List<UserResponse> getUsers();
+
+    UserResponse getUser(Long id);
+
+    List<User> findUserByIsSynced(boolean isSynced);
+
+    void save(User user);
 }

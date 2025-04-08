@@ -17,8 +17,7 @@ public class OAuth2Client {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private
-    User user;  // Ứng dụng có thể liên kết với một user tạo ra nó
+    private User user;  // Ứng dụng có thể liên kết với một user tạo ra nó
 
     public String getClientId() {
         return clientId;

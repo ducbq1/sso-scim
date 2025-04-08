@@ -12,21 +12,21 @@ import java.util.Set;
 public class ScimGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "display_name", nullable = false)
-    String displayName;
+    private String displayName;
 
     @Column(name = "description")
-    String description;
+    private String description;
 
     @Column(name = "created", nullable = false, updatable = false)
-    LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime created = LocalDateTime.now();
 
     @Column(name = "last_modified")
-    LocalDateTime lastModified = LocalDateTime.now();
+    private LocalDateTime lastModified = LocalDateTime.now();
 
     // Many-to-Many mapping with User
     @ManyToMany(mappedBy = "groups")
-    Set<ScimUser> users = new HashSet<>();
+    private Set<ScimUser> users = new HashSet<>();
 }

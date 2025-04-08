@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 public class Token {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String accessToken;    // JWT hoặc opaque token
-    String refreshToken;
-    LocalDateTime issuedAt;
-    LocalDateTime expiresAt;  // Thời gian hết hạn token
-    Boolean revoked;  // Đánh dấu token đã bị thu hồi hay chưa
+    private Long id;
+    private String accessToken;    // JWT hoặc opaque token
+    private String refreshToken;
+    private LocalDateTime issuedAt;
+    private LocalDateTime expiresAt;  // Thời gian hết hạn token
+    private Boolean revoked;  // Đánh dấu token đã bị thu hồi hay chưa
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    User user;
+    private User user;
 }

@@ -11,11 +11,11 @@ public class ScimSyncToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "token_value", nullable = false)
-    String tokenValue;
+    private String tokenValue;
 
     @Column(name = "issued_at", nullable = false)
-    LocalDateTime issuedAt = LocalDateTime.now();
+    private LocalDateTime issuedAt = LocalDateTime.now();
 }

@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 public class ScimProvisioning {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String action;  // VD: "CREATE", "UPDATE", "DELETE"
-    String resourceType;  // VD: "User", "Group"
-    LocalDateTime timestamp;
-    String status;   // VD: "SUCCESS", "FAILED"
+    private Long id;
+    private String action;  // VD: "CREATE", "UPDATE", "DELETE"
+    private String resourceType;  // VD: "User", "Group"
+    private LocalDateTime timestamp;
+    private String status;   // VD: "SUCCESS", "FAILED"
 }

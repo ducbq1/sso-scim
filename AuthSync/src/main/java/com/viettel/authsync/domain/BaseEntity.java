@@ -12,17 +12,17 @@ public abstract class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;  // ID dùng chung cho mọi entity
+    private Long id;  // ID dùng chung cho mọi entity
 
     @CreationTimestamp
     @Column(updatable = false)
-    LocalDateTime createdAt;  // Thời gian tạo (sử dụng Hibernate tự động gán)
+    private LocalDateTime createdAt;  // Thời gian tạo (sử dụng Hibernate tự động gán)
 
     @UpdateTimestamp
-    LocalDateTime updatedAt;  // Thời gian cập nhật (Hibernate tự động gán)
+    private LocalDateTime updatedAt;  // Thời gian cập nhật (Hibernate tự động gán)
 
-    String createdBy;  // Người tạo bản ghi (có thể dùng cơ chế auditor)
-    String updatedBy;  // Người chỉnh sửa cuối
+    private String createdBy;  // Người tạo bản ghi (có thể dùng cơ chế auditor)
+    private String updatedBy;  // Người chỉnh sửa cuối
 
-    Boolean isDeleted = false;  // Xóa mềm (soft delete)
+    private Boolean isDeleted = false;  // Xóa mềm (soft delete)
 }

@@ -10,20 +10,20 @@ public class Menu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
-    String name;
+    private String name;
 
     @Column(name = "url", nullable = false)
-    String url;
+    private String url;
 
     @Column(name = "icon")
-    String icon;
+    private String icon;
 
     @Column(name = "parent_id")
-    Long parentId;
+    private Long parentId;
 
     @ManyToMany(mappedBy = "menus", fetch = FetchType.LAZY)
-    Set<Role> roles;
+    private Set<Role> roles;
 }

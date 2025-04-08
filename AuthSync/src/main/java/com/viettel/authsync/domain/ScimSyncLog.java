@@ -11,20 +11,20 @@ public class ScimSyncLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "external_id")
-    String externalId;
+    private String externalId;
 
     @Column(name = "user_id")
-    Long userId;  // Can map to User Entity if needed
+    private Long userId;  // Can map to User Entity if needed
 
     @Column(name = "status")
-    String status;
+    private String status;
 
     @Column(name = "message", columnDefinition = "TEXT")
-    String message;
+    private String message;
 
     @Column(name = "synced_at", nullable = false)
-    LocalDateTime syncedAt = LocalDateTime.now();
+    private LocalDateTime syncedAt = LocalDateTime.now();
 }

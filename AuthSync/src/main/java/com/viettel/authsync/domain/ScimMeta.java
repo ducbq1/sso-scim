@@ -12,17 +12,17 @@ public class ScimMeta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "created", nullable = false, updatable = false)
-    LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime created = LocalDateTime.now();
 
     @Column(name = "last_modified")
-    LocalDateTime lastModified = LocalDateTime.now();
+    private LocalDateTime lastModified = LocalDateTime.now();
 
     @Column(name = "resource_type", nullable = false)
-    String resourceType;
+    private String resourceType;
 
     @Column(name = "location", nullable = false)
-    String location;
+    private String location;
 }
