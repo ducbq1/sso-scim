@@ -24,6 +24,14 @@ public class Role {
     )
     private Set<Menu> menus;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "role_permission_mapping",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private Set<Permission> permissions;
+
     public Long getId() {
         return id;
     }
