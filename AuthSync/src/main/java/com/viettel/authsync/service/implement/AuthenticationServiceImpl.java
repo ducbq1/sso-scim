@@ -63,7 +63,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             JWTClaimsSet jwtClaimsSet = verifyToken(token, false).getJWTClaimsSet();
             return IntrospectResponse.builder()
                     .username(jwtClaimsSet.getSubject())
-                    .organization(jwtClaimsSet.getAudience().getFirst())
+//                    .organization(jwtClaimsSet.getAudience().getFirst())
                     .roles(Arrays.stream(
                                     jwtClaimsSet.getClaim("scope").toString().split(" "))
                             .collect(Collectors.toSet()))

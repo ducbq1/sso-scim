@@ -55,10 +55,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    public List<User> findUserByIsSynced(boolean isSynced) {
-        return userRepository.findUserByIsSynced(isSynced);
-    }
-
     public UserResponse createUser(UserCreationRequest request) {
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));

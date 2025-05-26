@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
     private static final String MIN_ATTRIBUTE = "min";
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = RuntimeException.class)
     ResponseEntity<ApiResponse> handlingRuntimeException(RuntimeException exception) {
         logger.error("Exception: ", exception);
         ApiResponse apiResponse = new ApiResponse();
@@ -91,10 +91,10 @@ public class GlobalExceptionHandler {
         try {
             errorCode = ErrorCode.valueOf(enumKey);
 
-            var constraintViolation =
-                    exception.getBindingResult().getAllErrors().getFirst().unwrap(ConstraintViolation.class);
-
-            attributes = constraintViolation.getConstraintDescriptor().getAttributes();
+//            var constraintViolation =
+//                    exception.getBindingResult().getAllErrors().getFirst().unwrap(ConstraintViolation.class);
+//
+//            attributes = constraintViolation.getConstraintDescriptor().getAttributes();
 
             logger.info(attributes.toString());
 

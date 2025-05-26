@@ -9,8 +9,6 @@ import com.viettel.authsync.dto.response.RoleResponse;
 
 @Mapper(componentModel = "spring")
 public interface RoleMapper {
-    @Mapping(target = "permissions", ignore = true)
-    @Mapping(target = "organizations", ignore = true)
     Role toRole(RoleRequest request);
 
     RoleResponse toRoleResponse(Role role);

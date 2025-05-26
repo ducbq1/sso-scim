@@ -14,6 +14,9 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,6 +40,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
@@ -64,12 +68,7 @@ public class SecurityConfig {
         http
                 .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
                 .with(authorizationServerConfigurer, (authorizationServer) ->
-                        authorizationServer
-                                .oidc(Customizer.withDefaults())    // Enable OpenID Connect 1.0
-                )
-                .authorizeHttpRequests((authorize) ->
-                        authorize
-                                .anyRequest().authenticated()
+                        authorizationServer.oidc(Customizer.withDefaults())    // Enable OpenID Connect 1.0
                 )
                 // Redirect to the login page when not authenticated from the
                 // authorization endpoint
@@ -83,9 +82,20 @@ public class SecurityConfig {
         // Accept access tokens for User Info and/or Client Registration
         http.oauth2ResourceServer((resourceServer) -> resourceServer.jwt(Customizer.withDefaults())
                 .authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
-        http.csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return (request, response, authentication) -> {
+            String redirectUri = request.getParameter("redirect_uri");
+            if (redirectUri != null && redirectUri.startsWith("https://")) {
+                response.sendRedirect(redirectUri);
+            } else {
+                response.sendRedirect("/default");
+            }
+        };
     }
 
     @Bean
@@ -94,22 +104,35 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/login", "/error")
-                        .permitAll()
+                        .requestMatchers("/login", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain
-                .formLogin(Customizer.withDefaults());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/perform_login")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .successHandler(successHandler()) // xử lý redirect_uri tại đây
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                )
+                .logout(logout -> logout.permitAll())
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(HttpBasicConfigurer::disable);
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
+
 
         return http.build();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withDefaultPasswordEncoder()
+        UserDetails userDetails = User
+                .builder()
                 .username("user")
-                .password("password")
+                .password(new BCryptPasswordEncoder().encode("password"))
                 .roles("USER")
                 .build();
 

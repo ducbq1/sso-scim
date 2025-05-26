@@ -9,7 +9,6 @@ import com.viettel.authsync.dto.response.PermissionResponse;
 
 @Mapper(componentModel = "spring")
 public interface PermissionMapper {
-    @Mapping(target = "roles", ignore = true)
     Permission toPermission(PermissionRequest request);
 
     PermissionResponse toPermissionResponse(Permission permission);

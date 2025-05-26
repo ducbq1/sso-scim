@@ -11,7 +11,7 @@ public class MainController {
         return "home";  // Trả về trang home
     }
 
-    @GetMapping("/public")
+    @GetMapping("/oauth/authorize")
     public String publicPage() {
         return "public";  // Trả về trang public không cần xác thực
     }

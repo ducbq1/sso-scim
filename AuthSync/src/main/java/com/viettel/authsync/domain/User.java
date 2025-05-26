@@ -12,8 +12,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private
-    Long id;
+    private Long id;
     @Column(name = "username", nullable = false, unique = true)
     private String username;
     private String password;  // hashed password
@@ -27,17 +26,24 @@ public class User {
     private Boolean isLocked; // Account locked status
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_role_mapping",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private
-    Set<Role> roles = new HashSet<>();
+    @JoinTable(name = "user_role_mapping", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private
-    List<OAuth2Client> oauth2Clients;  // Liên kết user với các OAuth2 client mà họ đã sử dụng SSO
+    private List<OAuth2Client> oauth2Clients;  // Liên kết user với các OAuth2 client mà họ đã sử dụng SSO
+
+
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
 
     public Long getId() {
         return id;

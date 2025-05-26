@@ -21,7 +21,5 @@ public interface UserService {
 
     UserResponse getUser(Long id);
 
-    List<User> findUserByIsSynced(boolean isSynced);
-
     void save(User user);
 }
