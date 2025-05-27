@@ -11,6 +11,6 @@ public class LoginController {
     public String loginPage(@RequestParam(value = "redirect_uri", required = false) String redirectUri,
                             Model model) {
         model.addAttribute("redirect_uri", redirectUri);
-        return "login";
+        return "auth/login";
     }
 }

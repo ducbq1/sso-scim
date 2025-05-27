@@ -104,7 +104,7 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/login", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/login", "/assets/**", "/scim/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 // Form login handles the redirect to the login page from the
@@ -114,7 +114,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/perform_login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .successHandler(successHandler()) // xử lý redirect_uri tại đây
+//                        .successHandler(successHandler()) // xử lý redirect_uri tại đây
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
@@ -132,7 +132,7 @@ public class SecurityConfig {
         UserDetails userDetails = User
                 .builder()
                 .username("user")
-                .password(new BCryptPasswordEncoder().encode("password"))
+                .password(passwordEncoder().encode("password"))
                 .roles("USER")
                 .build();
 
@@ -143,11 +143,12 @@ public class SecurityConfig {
     public RegisteredClientRepository registeredClientRepository() {
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
-                .clientSecret("{noop}secret")
+                .clientSecret(passwordEncoder().encode("secret"))
+//                .clientSecret("{noop}secret")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("http://127.0.0.1:9000/login/oauth2/code/oidc-client")
+                .redirectUri("http://localhost:8080/login/oauth2/code/oidc-client")
                 .postLogoutRedirectUri("http://127.0.0.1:9000/")
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
