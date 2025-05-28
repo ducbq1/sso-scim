@@ -32,6 +32,9 @@ AuthSync/build/
 ### VS Code ###
 AuthSync/.vscode/
 
-SyncPanel/dist/
-SyncPanel/node_modules/
-SyncPanel/.angular/
+scim-panel/dist/
+scim-panel/node_modules/
+scim-panel/.angular/
+auth-service/target/
+scim-panel/target/
+scim-service/target/
