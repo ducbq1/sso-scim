@@ -1,17 +1,17 @@
 HELP.md
-AuthSync/target/
-!AuthSync/.mvn/wrapper/maven-wrapper.jar
-!AuthSync/**/src/main/**/target/
-!AuthSync/**/src/test/**/target/
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
-AuthSync/.apt_generated
-AuthSync/.classpath
-AuthSync/.factorypath
-AuthSync/.project
-AuthSync/.settings
-AuthSync/.springBeans
-AuthSync/.sts4-cache
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -20,21 +20,23 @@ AuthSync/.sts4-cache
 *.ipr
 
 ### NetBeans ###
-AuthSync/nbproject/private/
-AuthSync/nbbuild/
-AuthSync/dist/
-AuthSync/nbdist/
-AuthSync/.nb-gradle/
-AuthSync/build/
-!AuthSync/**/src/main/**/build/
-!AuthSync/**/src/test/**/build/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### VS Code ###
-AuthSync/.vscode/
+.vscode/
+
+
+application-default.properties
+V01.*__migration*.sql
+
 
 scim-panel/dist/
 scim-panel/node_modules/
 scim-panel/.angular/
-auth-service/target/
-scim-panel/target/
-scim-service/target/
